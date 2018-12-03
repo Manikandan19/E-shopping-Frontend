@@ -1,0 +1,45 @@
+.login-title-container {
+  /* text-align: center; */
+  color: steelblue;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-password-container,
+.login-username-container {
+  margin-top: 20px;
+}
+
+.login-submit-button-container,
+.login-forgot-password-button-container,
+.login-signup-button-container {
+  width: 100%;
+  padding: 10px 0px;
+}
+.login-forgot-password-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  width: 100% !important;
+}
+
+.ui-button-raised {
+  height: 20px !important;
+  width: 100% !important;
+}
+
+.login-username,
+.login-password {
+  width: 100%;
+}
+
+.login-signup-button {
+  background: #d9377d;
+  color: white;
+}
+
+.ui-tooltip {
+  background: steelblue;
+}

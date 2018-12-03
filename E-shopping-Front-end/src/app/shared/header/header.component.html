@@ -1,0 +1,26 @@
+<div class="header-container">
+  <div class="header-first">
+    <div class="header-title-container">
+      <h4 routerLink="/home">Online shopping</h4>
+    </div>
+
+    <div class="header-search-bar-container">
+      <e-shopping-header-searchbar></e-shopping-header-searchbar>
+    </div>
+  </div>
+
+  <div class="header-button-container">
+    <div class="header-cart">
+      <button pButton type="button" routerLink="/users/cart" icon="pi pi-shopping-cart" label="Cart" class="ui-button-secondary header-button" iconPos="right"></button>
+    </div>
+
+    <div class="header-signin" *ngIf="!isUserAuthenticated">
+        <button pButton type="button" (click)="openDialogLogin()" icon="pi pi-sign-in" label="SignIn" class="ui-button-secondary header-button" iconPos="right"></button>
+    </div>
+
+    <div class="header-signin" *ngIf="isUserAuthenticated">
+        <button pButton type="button" (click)="getLogout()" icon="pi pi-sign-out" label="Sign Out" class="ui-button-secondary header-button" iconPos="right"></button>
+    </div>
+  </div>
+</div>
+

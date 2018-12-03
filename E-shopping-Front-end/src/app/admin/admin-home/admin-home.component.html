@@ -1,0 +1,14 @@
+<p>
+  admin-home works!
+</p>
+
+<p-sidebar [(visible)]="display" [fullScreen]="false" >
+ADSDF
+<p-menu [model]="items"></p-menu>
+</p-sidebar>
+
+<button type="text" (click)="display = true" pButton icon="pi pi-plus" label="Show"></button>
+
+<p-menu [model]="items"></p-menu>
+
+<router-outlet></router-outlet>

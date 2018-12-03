@@ -1,0 +1,56 @@
+.home-container {
+  padding: 10px;
+}
+
+.owl-home {
+  margin: 5px;
+}
+.owl-phone-container, owl-watch-container {
+  margin: 5px;
+}
+.owl-phone, .owl-watch{
+  padding: 10px;
+}
+.item {
+  padding-top: 10px;
+  color: steelblue;
+  text-align: center;
+}
+.phone-product-image-container, .watch-product-image-container{
+  display: flex;
+  justify-content: center;
+}
+
+.item1 img {
+  width: 100px;
+  height: 200px;
+  background: steelblue;
+  color: whitesmoke;
+}
+
+
+.item2 img {
+  width: 90px;
+  height: 150px;
+  background: steelblue;
+  color: whitesmoke;
+}
+
+.owl-phone-container, .owl-watch-container {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid lightgray; */
+}
+.owl-phone-title-container, .owl-watch-title-container {
+  border-bottom: 1px solid grey;
+  padding: 5px;
+}
+
+.owl-phone-title-container h3, .owl-watch-title-container h3 {
+  float: left;
+  color: grey;
+}
+
+.owl-phone-title-container button , .owl-watch-title-container button {
+  float: right;
+}

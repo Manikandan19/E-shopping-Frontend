@@ -1,0 +1,31 @@
+.footer-container {
+  background:#232f3e;
+  height:auto;
+  padding:10px;
+  color:white;
+}
+#footer-container-header {
+  color:yellowgreen;
+}
+
+.footer {
+  padding-top:30px;
+  width:100%;
+  display:flex;
+  justify-content: space-around;
+}
+
+.footer-address-list {
+  list-style:none;
+}
+
+.footer-copyright {
+  display:flex;
+  justify-content:flex-start;
+  padding-left:40%;
+  padding-right:auto;
+}
+
+#footer-line {
+  background: lightgrey;
+}
