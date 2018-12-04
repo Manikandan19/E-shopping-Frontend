@@ -19,8 +19,8 @@
             </div>
           </div>
         <div class="product-description-button-container">
-          <button class="description-btn" routerLink="/users/placeOrder">Buy now</button>
-          <button class="description-btn desc-button" routerLink="/users">Add to cart</button>
+          <button class="description-btn"  (click)="addOrderItem(product[0].productName)">Buy now</button>
+          <button class="description-btn desc-button" (click)="addToCart(product[0].productName)">Add to cart</button>
         </div>
       </div>
 
@@ -321,3 +321,4 @@
   </ng-container>
 </div>
 
+<p-toast></p-toast>

@@ -80,7 +80,8 @@ export class LoginComponent implements OnInit {
             this.loginResponse = response;
             if (this.loginResponse.message === 'success') {
               Swal('LOGIN', 'You were logged in successfully!', 'success');
-              this.authenticationService.login(this.loginResponse.token, this.loginResponse.role, this.loginResponse.email);
+              this.authenticationService.login(this.loginResponse.token, this.loginResponse.role,
+                this.loginResponse.email, this.loginResponse.userName, this.loginResponse.userId, this.loginResponse.phone);
               this.dialogRef.close();
               if (this.loginResponse.role === 'admin') {
                 console.log('Inside Admin navigation');

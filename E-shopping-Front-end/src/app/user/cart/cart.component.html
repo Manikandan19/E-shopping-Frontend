@@ -15,8 +15,8 @@
             <li>Product discount - {{product.productDiscount}}%</li>
           </ul>
           <div class="cart-content-button">
-              <p-dropdown [options]="items" placeholder="select an Item number" ></p-dropdown>
-              <button pButton class="ui-button-secondary btn-remove" label="Remove"></button>
+              <p-dropdown [options]="items" appCartPrice="event" placeholder="select an Item number" ></p-dropdown>
+              <button pButton class="ui-button-secondary btn-remove" label="Remove" (click)=deleteFromCart(product.productName)></button>
           </div>
         </div>
       </ng-container>
@@ -48,3 +48,5 @@
       </table>
   </div>
 </div>
+
+<p-toast></p-toast>

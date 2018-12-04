@@ -16,4 +16,20 @@ export class OrderService {
     console.log(obj);
     return this.http.post<Product[]>(this._url + '/getCart', obj);
   }
+
+  addToCart(obj) {
+    return this.http.post<Product[]>(this._url + '/addToCart', obj);
+  }
+
+  deleteFromCart(obj) {
+    return this.http.post<Product[]>(this._url + '/deleteFromCart', obj);
+  }
+
+  getOrderItem(obj) {
+    return this.http.post<Product[]>(this._url + '/addToPurchase', obj);
+  }
+
+  deleteOrderItem(obj) {
+    return this.http.post<Product[]>(this._url + '/deleteFromPurchase', obj);
+  }
 }

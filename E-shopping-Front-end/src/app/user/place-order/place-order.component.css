@@ -1,5 +1,15 @@
 .add-field {
-  margin-top: 20px;
+  margin: 20px 5px 5px 5px;
+  width: 100%;
+}
+
+.add-field1 {
+  margin: 20px 5px 5px 5px;
+  width: 48%;
+}
+.add-field2 {
+  margin:5px;
+  width: 48%;
 }
 
 .order-address {
@@ -26,14 +36,43 @@
   border: 1px solid lightgrey;
   padding: 10px;
 }
+
+.order-address-button-container {
+  padding: 5px;
+}
+
+.order-address-content {
+  display: flex;
+  flex-direction: column;
+  flex-flow: wrap;
+}
+
 .order-address-container h3 {
   text-align: center;
   color: steelblue;
 }
 
+.order-address-title {
+  padding: 5px;
+  border-bottom: 1px solid lightgray;
+}
+
+
+.state-field {
+  width: 100% !important;
+}
 :host /deep/ .ui-inputtext,
 pinputmask {
   width: 100%;
+}
+
+:host /deep/ .ui-dropdown {
+  width: 100% !important;
+}
+
+.phone-container {
+  padding: 5px;
+  display: flex;
 }
 
 .btn-address {
@@ -82,7 +121,8 @@ pinputmask {
   justify-content: center;
 }
 
-.btn-shop, .btn-order {
+.btn-shop,
+.btn-order {
   width: 40%;
   margin: 5px;
   padding: 5px;
@@ -139,7 +179,7 @@ pinputmask {
   width: 70%;
 }
 
-h3 {
+h5 {
   color: steelblue;
 }
 
@@ -152,15 +192,15 @@ ul li {
 }
 
 :host /deep/ .ui-dropdown {
-  margin:5px;
+  margin: 5px;
 }
+
 .btn-remove {
   width: 30%;
-
 }
 
 .cart-button-container {
-  margin: 10px ;
+  margin: 10px;
   padding: 15px;
   display: flex;
   justify-content: center;

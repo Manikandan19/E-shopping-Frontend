@@ -7,18 +7,22 @@ import {
 import { ProductService } from 'src/app/service/product.service';
 import { Product } from 'src/app/Model/product';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
+import { OrderService } from '../../service/order.service';
 
 @Component({
   selector: 'e-shopping-description',
   templateUrl: './description.component.html',
-  styleUrls: ['./description.component.css']
+  styleUrls: ['./description.component.css'],
+  providers: [MessageService]
 })
 export class DescriptionComponent implements OnInit, AfterViewInit {
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private orderService: OrderService,
+    private messageService: MessageService
   ) {}
 
   product: any[]; // to get individual product details from back-end
@@ -26,6 +30,11 @@ export class DescriptionComponent implements OnInit, AfterViewInit {
   home: MenuItem[]; // bread crumb item - home
   productName: any; // to get product name from product list component URL
   currentImage: any; // Product image selection
+  userEmail: String;
+  userPhone: String;
+
+  cartRequest: Object;
+  cartResponse: any;
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -33,6 +42,9 @@ export class DescriptionComponent implements OnInit, AfterViewInit {
         productName: params.get('productName')
       };
     });
+
+    this.userEmail = localStorage.getItem('email');
+    this.userPhone = localStorage.getItem('phone');
 
     this.productService.getIndividualProduct(this.productName).subscribe(
       response => {
@@ -62,5 +74,35 @@ export class DescriptionComponent implements OnInit, AfterViewInit {
 
   sendImage(image) {
     this.currentImage = image;
+  }
+
+  addToCart(productName) {
+    this.cartRequest = {
+      productName: productName,
+      email: this.userEmail,
+      phone: this.userPhone
+    };
+
+    this.orderService.addToCart(this.cartRequest).subscribe(
+      response => {
+        this.cartResponse = response;
+        if (this.cartResponse.message === 'success') {
+          this.router.navigateByUrl('/users/cart');
+        } else if (this.cartResponse.message === 'Product-exist') {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Add To Cart',
+            detail: 'This product is already in cart'
+          });
+        }
+      },
+      error => {
+        console.log('Error at add TO cart from description page', error);
+      }
+    );
+  }
+
+  addOrderItem(productName) {
+      this.router.navigate(['users/placeOrder'], {queryParams: {name: `${productName}`}});
   }
 }

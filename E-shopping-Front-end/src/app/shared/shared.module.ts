@@ -23,6 +23,7 @@ import {GalleriaModule} from 'primeng/galleria';
 import { ProductComparisonComponent } from './product-comparison/product-comparison.component';
 import {MenuModule} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -50,7 +51,8 @@ import {MenuItem} from 'primeng/api';
     BreadcrumbModule,
     TabViewModule,
     SliderModule,
-    GalleriaModule
+    GalleriaModule,
+    ToastModule
   ],
   exports: [
     HomeComponent,

@@ -34,4 +34,8 @@ export class CustomerService {
   registrationSendOTP(obj) {
     return this.http.post(this._url + '/registration/verifyEmail', obj, this.options);
   }
+
+  getOrderProduct(obj) {
+    return this.http.post(this._url + '/getOrderProduct', obj, this.options);
+  }
 }

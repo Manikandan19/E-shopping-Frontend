@@ -20,10 +20,11 @@ import { MatStepperModule, MatInputModule } from '@angular/material';
 import {DropdownModule} from 'primeng/dropdown';
 import {CaptchaModule} from 'primeng/captcha';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {CartPriceDirective} from './directive/cart-component.directive';
 
 
 @NgModule({
-  declarations: [CartComponent, PlaceOrderComponent],
+  declarations: [CartComponent, PlaceOrderComponent, CartPriceDirective],
   imports: [
     CommonModule,
     // BrowserAnimationsModule,
