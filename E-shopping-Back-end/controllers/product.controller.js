@@ -51,6 +51,32 @@ exports.getProduct = (req, res) => {
     });
 }
 
+
+//to get an single product by it's productName  --- Order
+exports.getOrderProduct = (req, res) => {
+    console.log('Name - ', req.body.productName);
+    Product.findOne({productName: req.body.productName})
+    .select('productName productPrice productDiscount imageLocation')
+    .exec()
+    .then( result => {
+        if(result !== null) {
+            var resultArray = new Array();
+            resultArray.push(result);
+            res.status(200).send(resultArray);
+        } else {
+            res.status(200).send({
+                message: 'Not-exist'
+            })
+        }
+
+    })
+    .catch( err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+}
+
 // Admin functionality - Product registration
 exports.productRegistration = (req, res, next) => {
     Product.find({productName: req.body.productName})

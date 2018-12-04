@@ -8,10 +8,10 @@ router.post("/getCart",  OrderController.cartDetails);
 
 router.post("/addToCart",  OrderController.addToCart);
 
-router.put("/deleteFromCart",  OrderController.deleteFromCart);
+router.post("/deleteFromCart",  OrderController.deleteFromCart);
 
 router.post("/addToPurchase", OrderController.addToPurchase);
 
-router.put("/deleteFromPurchase", OrderController.deleteFromPurchase);
+router.post("/deleteFromPurchase", OrderController.deleteFromPurchase);
 
 module.exports = router;

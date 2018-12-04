@@ -35,7 +35,7 @@ var orderSchema  = new Schema({
       shipped: {
         type: Boolean
       },
-      address: {
+      delivery: {
         type: Object,
         required: true
       }

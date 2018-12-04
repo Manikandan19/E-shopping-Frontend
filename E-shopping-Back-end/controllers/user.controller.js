@@ -42,7 +42,10 @@ exports.login = (req, res, next) => {
               message: "success",
               token: token,
               role: user[0].role,
-              email: user[0].email
+              email: user[0].email,
+              phone: user[0].phone,
+              userId: user[0]._id,
+              userName: user[0].username
             };
             res.send(successResult);
           } else {

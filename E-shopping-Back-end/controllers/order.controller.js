@@ -11,9 +11,13 @@ exports.cartDetails = (req, res, next) => {
         if (orders.length >= 1) {
             var totalProduct = [];
             orders.forEach(order => {
-                totalProduct.push(Product.findOne({
-                    productName: order.productName
-                }).select('productName productPrice imageLocation productDiscount'));
+                if (order.cart === true) {
+                    totalProduct.push(Product.findOne({
+                        productName: order.productName
+                    }).select('productName productPrice imageLocation productDiscount'));
+                } else {
+                    console.log('Product not in cart');
+                }
             });
             return Promise.all(totalProduct);
         } else {
@@ -32,13 +36,12 @@ exports.addToCart = (req, res, next) => {
 
     Order.findOne({
             email: req.body.email,
-            productName: req.body.productName,
-            cart: true
+            productName: req.body.productName
         })
         .exec()
         .then(order => {
-            console.log(order);
-            if (order.length < 1) {
+            if (order === null) {
+                console.log('Inside null');
                 var order = new Order({
                     productName: req.body.productName,
                     email: req.body.email,
@@ -47,13 +50,12 @@ exports.addToCart = (req, res, next) => {
                     purchased: false,
                     delivered: false,
                     shipped: false,
-                    address: Object
+                    delivery: Object
                 });
 
                 order
                     .save()
                     .then(result => {
-                        console.log(result.length);
                         res.status(201).json({
                             message: "success",
                             result: result
@@ -64,6 +66,139 @@ exports.addToCart = (req, res, next) => {
                             error: err
                         });
                     });
+            } else if (order.cart === false) {
+                Order.findOneAndUpdate({
+                        email: req.body.email,
+                        productName: req.body.productName
+                    }, {
+                        $set: {
+                            cart: true
+                        }
+                    }).exec()
+                    .then(o => {
+                        res.send({
+                            message: 'success'
+                        })
+                    }).catch(err => {
+                        res.status(500).send({
+                            error: err
+                        })
+                    })
+            } else {
+                res.status(200).send({
+                    message: 'Product-exist'
+                })
+            }
+        }).catch(err => {
+            res.status(500).send({
+                error: err
+            })
+        })
+}
+
+exports.deleteFromCart = (req, res, next) => {
+
+    Order.findOne({
+            email: req.body.email,
+            productName: req.body.productName
+        })
+        .exec()
+        .then(order => {
+            if (order !== null) {
+                if (order.cart == true) {
+                    Order.findOneAndUpdate({
+                            productName: req.body.productName
+                        }, {
+                            $set: {
+                                cart: false
+                            }
+                        })
+                        .exec()
+                        .then(o => {
+                            res.send({
+                                message: 'success'
+                            })
+                        }).catch(err => {
+                            res.status(500).send({
+                                error: err
+                            })
+                        })
+                } else {
+                    res.status(200).send({
+                        message: 'Not exist'
+                    })
+                }
+
+            } else {
+                res.status(200).send({
+                    message: 'product does not exist'
+                })
+            }
+
+            // }
+        })
+        .catch(err => {
+            res.status(500).send({
+                error: err
+            });
+        })
+}
+
+
+exports.addToPurchase = (req, res, next) => {
+    Order.findOne({
+            email: req.body.email,
+            productName: req.body.productName
+        })
+        .exec()
+        .then(order => {
+            if (order === null) {
+                var order = new Order({
+                    productName: req.body.productName,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    cart: false,
+                    purchased: true,
+                    delivered: false,
+                    shipped: false,
+                    delivery: req.body.address
+                });
+
+                order
+                    .save()
+                    .then(result => {
+                        res.status(201).json({
+                            message: "success",
+                            result: result
+                        });
+                    })
+                    .catch(err => {
+                        res.status(500).json({
+                            error: err
+                        });
+                    });
+            } else if (order.purchased === false) {
+                Order.findOneAndUpdate({
+                        email: req.body.email,
+                        productName: req.body.productName
+                    }, {
+                        $set: {
+                            cart: false,
+                            purchased: true,
+                            delivered: false,
+                            shipped: false,
+                            delivery : req.body.address
+                        }
+                    }).exec()
+                    .then(o => {
+                        res.send({
+                            message: 'success'
+                        })
+                    }).catch(err => {
+                        res.status(501).send({
+                            error: err
+                        })
+                    })
             } else {
                 res.status(200).send({
                     message: 'Product already exist'
@@ -76,150 +211,46 @@ exports.addToCart = (req, res, next) => {
         })
 }
 
-exports.deleteFromCart = (req, res, next) => {
-
-    Order.find({
-            email: req.body.email
-        })
-        .exec()
-        .then(order => {
-            if (order.length === 1) {
-                Order.findOneAndUpdate({
-                        productName: req.body.productName
-                    }, {
-                        $set: {
-                            cart: false
-                        }
-                    })
-                    .exec()
-                    .then(o => {
-                        if (o.length === 1) {
-                            res.send({
-                                message: 'success'
-                            })
-                        } else {
-                            res.send({
-                                message: 'failure'
-                            })
-                        }
-                    }).catch(err => {
-                        res.status(500).send({
-                            error: err
-                        })
-                    })
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                error: err
-            });
-        })
-}
-
-
-exports.addToPurchase = (req, res, next) => {
-    // Order.findOne({
-    //         email: req.body.email,
-    //         productName: req.body.productName,
-    //         purchased: false
-    //     })
-    //     .exec()
-    //     .then(order => {
-    //         if (order === null) {
-    //             console.log('Inside NULL');
-    //             var order = new Order({
-    //                 productName: req.body.productName,
-    //                 email: req.body.email,
-    //                 phone: req.body.phone,
-    //                 cart: false,
-    //                 purchased: true,
-    //                 delivered: false,
-    //                 shipped: false,
-    //                 address: req.body.address
-    //             });
-
-    //             order
-    //                 .save()
-    //                 .then(result => {
-    //                     res.status(201).json({
-    //                         message: "success",
-    //                         result: result
-    //                     });
-    //                 })
-    //                 .catch(err => {
-    //                     res.status(500).json({
-    //                         error: err
-    //                     });
-    //                 });
-    //         } else if (order.purchased === false) {
-    //             console.log('Inside FALSE');
-    //             order.findOneAndUpdate({
-    //                     email: req.body.email,
-    //                 }, {
-    //                     $set: {
-    //                         cart: false,
-    //                         purchased: true,
-    //                         delivered: false,
-    //                         shipped: false,
-    //                         address: req.body.address
-    //                     }
-    //                 }).exec()
-    //                 .then(o => {
-    //                         res.send({
-    //                             message: 'success'
-    //                         })
-    //                         res.send({
-    //                             message: 'failure'
-
-    //                 }).catch(err => {
-    //                     res.status(500).send({
-    //                         error: err
-    //                     })
-    //                 })
-    //         } else {
-    //             res.status(200).send({
-    //                 message: 'Product already exist'
-    //             })
-    //         }
-    //     }).catch(err => {
-    //         res.status(500).send({
-    //             error: err
-    //         })
-    //     })
-}
-
 
 exports.deleteFromPurchase = (req, res, next) => {
 
-    Order.find({
-            email: req.body.email
+    Order.findOne({
+            email: req.body.email,
+            productName: req.body.productName
         })
         .exec()
         .then(order => {
-            if (order.length === 1) {
-                Order.findOneAndUpdate({
-                        productName: req.body.productName
-                    }, {
-                        $set: {
-                            purchased: false
-                        }
-                    })
-                    .exec()
-                    .then(o => {
-                        if (o.length === 1) {
+            if (order !== null) {
+                if (order.purchased == true) {
+                    Order.findOneAndUpdate({
+                            productName: req.body.productName
+                        }, {
+                            $set: {
+                                purchased: false,
+                                cart: false
+                            }
+                        })
+                        .exec()
+                        .then(o => {
+                            console.log('!!!!!!');
                             res.send({
                                 message: 'success'
                             })
-                        } else {
-                            res.send({
-                                message: 'failure'
+                        }).catch(err => {
+                            res.status(500).send({
+                                error: err
                             })
-                        }
-                    }).catch(err => {
-                        res.status(500).send({
-                            error: err
                         })
+                } else {
+                    res.status(200).send({
+                        message: 'product is not in purchased'
                     })
+                }
+
+            } else {
+                res.status(200).send({
+                    message: 'product does not exist'
+                })
             }
         })
         .catch(err => {
