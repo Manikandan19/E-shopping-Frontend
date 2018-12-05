@@ -43,3 +43,7 @@
 .ui-tooltip {
   background: steelblue;
 }
+
+i{
+  cursor: pointer;
+}

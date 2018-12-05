@@ -15,6 +15,8 @@ export class CartComponent implements OnInit {
   cartResponseObject: any;
   arrayObj: any[];
   selectedItems: any[];
+  discountAmount: number;
+  totalAmount: number;
   items: any[] = [
     { label: '1', value: 1 },
     { label: '2', value: 2 },
@@ -34,7 +36,10 @@ export class CartComponent implements OnInit {
   deleteFromCartRequest: Object;
   deleteFromCartResponse: any;
 
-  constructor(private orderService: OrderService, private messageService: MessageService) {}
+  constructor(
+    private orderService: OrderService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit() {
     this.cartRequestObject = {
@@ -51,6 +56,14 @@ export class CartComponent implements OnInit {
     );
   }
 
+  getSelectItem(event, price, discount) {
+    if (event) {
+      this.totalAmount = event.value * price;
+      this.discountAmount = price * (discount * event.value  / 100);
+      // this.totalAmount = price - this.discountAmount;
+      console.log(this.totalAmount);
+    }
+  }
 
   // Remove Item from cart
   deleteFromCart(productName) {

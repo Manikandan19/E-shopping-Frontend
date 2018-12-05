@@ -38,3 +38,7 @@
 :host /deep/ p-inputmask input{
   width: 100%;
 }
+
+i{
+  cursor: pointer;
+}

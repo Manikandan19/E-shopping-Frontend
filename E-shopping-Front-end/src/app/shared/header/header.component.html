@@ -10,7 +10,7 @@
   </div>
 
   <div class="header-button-container">
-    <div class="header-cart">
+    <div class="header-cart" *ngIf="isUserAuthenticated">
       <button pButton type="button" routerLink="/users/cart" icon="pi pi-shopping-cart" label="Cart" class="ui-button-secondary header-button" iconPos="right"></button>
     </div>
 

@@ -1,5 +1,4 @@
 <div class="product-description-container" *ngIf="product">
-  <ng-container>
       <div class="product-description-image-container">
         <div class="product-description-img">
           <img src="{{currentImage}}">
@@ -310,7 +309,22 @@
                   </ng-container>
               </p-tabPanel>
               <p-tabPanel header="Offers">
-                  Content 3
+                  <h6 id="specification-title">Offers  </h6>
+                 <table class="spec-general spec-offer" >
+                   <tr>
+                     <th>Offer Type</th>
+                     <th>Offer(in Percentage)</th>
+                   </tr>
+                  <tr>
+                    <td>Debit card</td>
+                    <td>{{product[0]['offer'].debitCard}}</td>
+                </tr>
+
+                <tr>
+                  <td>Normal discount</td>
+                  <td>{{product[0].productDiscount}}</td>
+              </tr>
+                 </table>
               </p-tabPanel>
               <p-tabPanel header="Description">
                   <P>{{product[0].description}}</P>
@@ -318,7 +332,6 @@
           </p-tabView>
           </div>
       </div>
-  </ng-container>
 </div>
 
 <p-toast></p-toast>

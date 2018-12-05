@@ -29,12 +29,38 @@ export class PlaceOrderComponent implements OnInit {
   deleteFromCartRequest: Object;
   deleteFromCartResponse: any;
 
+  val2: string = 'cashOnDelivery';
+
   items: any[] = [
     { label: '1', value: 1 },
     { label: '2', value: 2 },
     { label: '3', value: 3 },
     { label: '4', value: 4 },
     { label: '5', value: 5 }
+  ];
+
+  debitCardExpiryYear: any[] = [
+    {label: '2018', value: '2018'},
+    {label: '2019', value: '2019'},
+    {label: '2020', value: '2020'},
+    {label: '2021', value: '2021'},
+    {label: '2022', value: '2022'},
+    {label: '2023', value: '2023'},
+  ];
+
+  debitCardExpiryMonth: any[] = [
+    {label: 'Jan', value: '01'},
+    {label: 'Feb', value: '02'},
+    {label: 'Mar', value: '03'},
+    {label: 'Apr', value: '04'},
+    {label: 'May', value: '05'},
+    {label: 'Jun', value: '06'},
+    {label: 'Jul', value: '07'},
+    {label: 'Aug', value: '08'},
+    {label: 'Sep', value: '09'},
+    {label: 'Oct', value: '10'},
+    {label: 'Nov', value: '11'},
+    {label: 'Dec', value: '12'},
   ];
 
   deliveryState: any[] = [
@@ -119,34 +145,20 @@ export class PlaceOrderComponent implements OnInit {
     }
 
     this.orderAddressForm = this.formBuilder.group({
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('[a-zA-Z]*'),
-          Validators.minLength(3),
-          Validators.maxLength(40)
-        ]
-      ],
-      phone: [
-        '',
-        [Validators.required, Validators.pattern('[9876]{1}[0-9]{9}')]
-      ],
+      name: ['', [Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.minLength(3), Validators.maxLength(40)]],
+      phone: ['', [Validators.required, Validators.pattern('[9876]{1}[0-9]{9}')]],
       pinCode: ['', [Validators.required, Validators.pattern('[0-9]{6}')]],
       address: ['', Validators.required],
-      landMark: [
-        '',
-        [Validators.required, Validators.pattern('[a-zA-Z0-9 ]*')]
-      ],
+      landMark: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9 ]*')]],
       alternatePhone: ['', [Validators.pattern('[9876]{1}[0-9]{9}')]],
       district: ['', [Validators.required]],
       state: ['', [Validators.required]],
       type: ['', Validators.required]
     });
 
-    this.orderForm = this.formBuilder.group({
-      items: ['', Validators.required]
-    });
+    // this.orderForm = this.formBuilder.group({
+    //   items: ['', Validators.required]
+    // });
 
     this.paymentForm = this.formBuilder.group({
       debitCard: ['', [Validators.required, Validators.pattern('[0-9]{16}')]],

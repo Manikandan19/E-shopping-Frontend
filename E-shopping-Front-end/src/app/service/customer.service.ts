@@ -12,30 +12,36 @@ export class CustomerService {
 
   _url = 'http://172.16.144.166:3000/customer';
 
+  _userAuthenticatedToken: String = localStorage.getItem('currentUser');
 
-  private options = { headers: new HttpHeaders().set('content-Type', 'application/json; charset=utf-8')};
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': `Bearer ${this._userAuthenticatedToken}`
+    })
+  };
 
   getRegistration(obj) {
-      return this.http.post(this._url + '/registration', obj, this.options);
+      return this.http.post(this._url + '/registration', obj);
   }
 
   getLogin(obj: Product) {
-    return this.http.post(this._url + '/login', obj, this.options);
+    return this.http.post(this._url + '/login', obj);
   }
 
   sendOTP(obj) {
-    return this.http.post(this._url + '/changePassword/verifyEmail', obj, this.options);
+    return this.http.post(this._url + '/changePassword/verifyEmail', obj);
   }
 
   changePassword(obj) {
-    return this.http.post(this._url + '/changePassword', obj, this.options);
+    return this.http.post(this._url + '/changePassword', obj);
   }
 
   registrationSendOTP(obj) {
-    return this.http.post(this._url + '/registration/verifyEmail', obj, this.options);
+    return this.http.post(this._url + '/registration/verifyEmail', obj);
   }
 
   getOrderProduct(obj) {
-    return this.http.post(this._url + '/getOrderProduct', obj, this.options);
+    return this.http.post(this._url + '/getOrderProduct', obj, this.httpOptions);
   }
 }

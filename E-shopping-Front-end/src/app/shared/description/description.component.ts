@@ -9,6 +9,7 @@ import { Product } from 'src/app/Model/product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { OrderService } from '../../service/order.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'e-shopping-description',
@@ -46,10 +47,9 @@ export class DescriptionComponent implements OnInit, AfterViewInit {
     this.userEmail = localStorage.getItem('email');
     this.userPhone = localStorage.getItem('phone');
 
-    this.productService.getIndividualProduct(this.productName).subscribe(
+    this.productService.getProduct(this.productName).subscribe(
       response => {
         this.product = response;
-        // this.product = this.product;
         console.log(this.product);
         this.currentImage = this.product[0]['imageLocation'].normal;
 
@@ -77,32 +77,43 @@ export class DescriptionComponent implements OnInit, AfterViewInit {
   }
 
   addToCart(productName) {
-    this.cartRequest = {
-      productName: productName,
-      email: this.userEmail,
-      phone: this.userPhone
-    };
+    if (this.userEmail !== undefined) {
+      this.cartRequest = {
+        productName: productName,
+        email: this.userEmail,
+        phone: this.userPhone
+      };
 
-    this.orderService.addToCart(this.cartRequest).subscribe(
-      response => {
-        this.cartResponse = response;
-        if (this.cartResponse.message === 'success') {
-          this.router.navigateByUrl('/users/cart');
-        } else if (this.cartResponse.message === 'Product-exist') {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Add To Cart',
-            detail: 'This product is already in cart'
-          });
+      this.orderService.addToCart(this.cartRequest).subscribe(
+        response => {
+          this.cartResponse = response;
+          if (this.cartResponse.message === 'success') {
+            this.router.navigateByUrl('/users/cart');
+          } else if (this.cartResponse.message === 'Product-exist') {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Add To Cart',
+              detail: 'This product is already in cart'
+            });
+          }
+        },
+        error => {
+          console.log('Error at add TO cart from description page', error);
         }
-      },
-      error => {
-        console.log('Error at add TO cart from description page', error);
-      }
-    );
+      );
+    } else {
+      Swal('Authentication Failed', 'Authentication Failed .....Please Login', 'info');
+    }
+
+
   }
 
   addOrderItem(productName) {
+
+    if (this.userEmail !== undefined) {
       this.router.navigate(['users/placeOrder'], {queryParams: {name: `${productName}`}});
+    } else {
+      Swal('Authentication Failed', 'Authentication Failed .....Please Login', 'info');
+    }
   }
 }

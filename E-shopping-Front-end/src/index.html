@@ -22,8 +22,11 @@
 
 
   <!-- Captcha -->
+  <!-- <script src='https://www.google.com/recaptcha/api.js?render=6LcOOHoUAAAAAEqQj1LNt721OtFLaldz3-pZbxea'></script> -->
+  <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LcOOHoUAAAAAEqQj1LNt721OtFLaldz3-pZbxea" async></script> -->
   <script src="https://www.google.com/recaptcha/api.js?render=explicit&onload=loadCaptcha" async defer></script>
   <script src="https://www.google.com/recaptcha/api.js?render=explicit&onload=initRecaptcha" async defer></script>
+
   <!-- Login module - Icon Pack -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
@@ -37,7 +40,10 @@
 
 <body>
   <e-shopping-root>
-    Loading...
+    <div class="spinner-container">
+        <img src="assets/images/spinner.gif">
+    </div>
+
   </e-shopping-root>
 </body>
 

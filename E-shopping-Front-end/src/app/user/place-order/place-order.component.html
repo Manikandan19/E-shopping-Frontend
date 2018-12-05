@@ -31,7 +31,8 @@
             </span>
 
             <span class="ui-float-label add-field1">
-              <p-inputMask mask="999999" (onBlur)="validateDeliveryPinCode()" slotChar="" formControlName="pinCode" pTooltip="Pin code must be required and it must contain 6 digit valid number"></p-inputMask>
+              <p-inputMask mask="999999" (onBlur)="validateDeliveryPinCode()" slotChar="" formControlName="pinCode"
+                pTooltip="Pin code must be required and it must contain 6 digit valid number"></p-inputMask>
               <label for="float-input">Pin Code*</label>
             </span>
 
@@ -41,21 +42,22 @@
             </span>
 
             <span class="ui-float-label add-field">
-              <textarea [rows]="5" [cols]="50" (blur)="validateAddress()" formControlName="address" pInputTextarea autoResize="true"></textarea>
+              <textarea [rows]="5" [cols]="50" (blur)="validateAddress()" formControlName="address" pInputTextarea
+                autoResize="true"></textarea>
               <label for="float-input" class="address-field-float">Address*</label>
             </span>
 
             <!-- Dropdown -->
             <span class=" add-field2">
-              <p-dropdown  placeholder="Select state" formControlName="state" [options]="deliveryState" (onChange)="getSelectDeliveryState($event)" ></p-dropdown>
+              <p-dropdown placeholder="Select state" formControlName="state" [options]="deliveryState" (onChange)="getSelectDeliveryState($event)"></p-dropdown>
             </span>
 
             <span class="add-field2">
-              <p-dropdown placeholder="Select district" formControlName="district" [options]="deliveryDistrict" ></p-dropdown>
+              <p-dropdown placeholder="Select district" formControlName="district" [options]="deliveryDistrict"></p-dropdown>
             </span>
 
             <span class="add-field">
-                <p-dropdown placeholder="Type of delivery" formControlName="type" [options]="deliveryType" ></p-dropdown>
+              <p-dropdown placeholder="Type of delivery" formControlName="type" [options]="deliveryType"></p-dropdown>
             </span>
           </div>
           <div class="order-address-button-container">
@@ -133,14 +135,41 @@
           <img src="../../../assets/images/user/payment1.jpg">
         </div>
         <div class="payment-content-container">
-          <h3>Payment Option</h3>
+          <h3>Payment Mode</h3>
           <hr>
-          <span class="ui-float-label credit-card-field">
+
+          <p-accordion>
+            <p-accordionTab header="Cash On Delivery" selected="true">
+              <p-captcha siteKey="6LcOOHoUAAAAAEqQj1LNt721OtFLaldz3-pZbxea" (onResponse)="captchaResponse($event)"></p-captcha>
+            </p-accordionTab>
+            <p-accordionTab header="Debit cart">
+              <span class="ui-float-label credit-card-field">
+                <p-inputMask mask="9999-9999-9999-9999" slotChar="1" pTooltip="Please enter your credit card number"></p-inputMask>
+                <label for="float-input">Debit card number</label>
+              </span>
+
+              <span class="ui-float-label credit-card-field">
+                <p-inputMask mask="999" slotChar="1" pTooltip="CVV number"></p-inputMask>
+                <label for="float-input">CVV</label>
+              </span>
+              <span class="card-expiry-field">
+                  <p-dropdown placeholder="Select card expiry year" [options]="debitCardExpiryYear"  ></p-dropdown>
+                  <p-dropdown placeholder="Select card expiry month" [options]="debitCardExpiryMonth" ></p-dropdown>
+              </span>
+
+            </p-accordionTab>
+          </p-accordion>
+
+          <!-- <p-radioButton name="group2" value="debitCard" label="Debit Card" [(ngModel)]="val2" inputId="preopt1"></p-radioButton>
+          <p-radioButton name="group2" value="cashOnDelivery" label="Cash on delivery" [(ngModel)]="val2" inputId="preopt1"></p-radioButton> -->
+
+          <!-- <span class="ui-float-label credit-card-field">
             <p-inputMask mask="9999-9999-9999-9999" slotChar="1" pTooltip="Please enter your credit card number"></p-inputMask>
             <label for="float-input">Credit card number</label>
           </span>
-          <!-- <p-captcha siteKey="6Lelan4UAAAAANe7YBWLXgxc6AIWctdG2mgKIuPZ" (onResponse)="captchaResponse($event)"
-            initCallback="loadCaptcha"></p-captcha> -->
+          <p-captcha siteKey="6LcOOHoUAAAAAEqQj1LNt721OtFLaldz3-pZbxea" (onResponse)="captchaResponse($event)"></p-captcha> -->
+          <!-- <p-captcha siteKey="6LcOOHoUAAAAAEqQj1LNt721OtFLaldz3-pZbxea" (onResponse)="captchaResponse($event)" -->
+          <!-- initCallback="loadCaptcha"></p-captcha> -->
           <div class="payment-button-container">
             <button pButton type="button" matStepperPrevious class="ui-button-info btn-shop" label="Go Back"></button>
             <button pButton type="button" matStepperNext class="ui-button-info btn-order" label="Order" (click)="orderResponse()"

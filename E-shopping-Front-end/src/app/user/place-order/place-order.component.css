@@ -135,6 +135,10 @@ pinputmask {
   margin-right: 10px;
 }
 
+.card-expiry-field {
+  display: flex;
+  padding: 5px;;
+}
 /* Cart details */
 .cart-container {
   display: flex;

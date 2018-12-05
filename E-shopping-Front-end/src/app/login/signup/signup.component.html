@@ -39,14 +39,10 @@
 
       <div class="signup-phone-container">
           <span class="ui-float-label">
-              <p-inputMask  formControlName="phone" (blur)="validatePhone()" mask="9999999999" slotChar="" pTooltip="Please enter your registered mobile number"></p-inputMask>
+              <p-inputMask  formControlName="phone" (onBlur)="validatePhone()" mask="9999999999" slotChar="" pTooltip="Please enter your registered mobile number"></p-inputMask>
               <label for="float-input">Mobile number</label>
           </span>
       </div>
-
-      <!-- <div class="signup-captcha-container">
-        <p-captcha siteKey="6LdrWHgUAAAAAA0_7WfBmOj5PfbiG0oob6VAAH2l"  (onResponse)="showResponse($event)" initCallback="loadCaptcha"></p-captcha>
-      </div> -->
     </div>
 
     <div class="signup-button-container">

@@ -8,6 +8,7 @@
   width: 50%;
   color: black;
 }
+
 .product-description-image-container {
   width: 50%;
   display: flex;
@@ -23,11 +24,12 @@
   display: flex;
 
 }
+
 .product-description-img img {
   height: 450px;
 }
 
-.description-content{
+.description-content {
   margin: 20px 20px 20px 0px;
 }
 
@@ -37,33 +39,44 @@ table {
 
 h6 {
   color: steelblue;
-  margin: 20px 20px 20px 0px ;
+  margin: 20px 20px 20px 0px;
 }
 
-p{
+p {
   text-align: center;
 }
-.spec-general td{
+
+.spec-general td {
   padding: 15px;
+}
+
+.spec-offer th,
+.spec-offer td {
+  padding: 15px;
+  text-align: center;
+  border: 1px solid
 }
 
 .spec-total td {
   padding: 10px;
 }
+
 .description-btn {
   background: orange;
-    width: 40%;
-    margin: auto;
-    height: 60px;
-    color: white;
-    font-size: 20px;
-    border: none;
-    cursor: pointer;
-}
-.desc-button {
-  background:#fb641b;
+  width: 40%;
+  margin: auto;
+  height: 60px;
+  color: white;
+  font-size: 20px;
+  border: none;
   cursor: pointer;
 }
+
+.desc-button {
+  background: #fb641b;
+  cursor: pointer;
+}
+
 .product-description-button-container {
   display: flex;
   justify-content: center;
@@ -76,11 +89,13 @@ p{
   display: flex;
   justify-content: center;
   margin: 5px 5px;
+  cursor: pointer;
 }
 
 .item:active {
   border: 1px solid steelblue;
 }
+
 .item img {
   height: 100px;
 }

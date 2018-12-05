@@ -21,8 +21,8 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CaptchaModule} from 'primeng/captcha';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {CartPriceDirective} from './directive/cart-component.directive';
-
-
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {AccordionModule} from 'primeng/accordion';
 @NgModule({
   declarations: [CartComponent, PlaceOrderComponent, CartPriceDirective],
   imports: [
@@ -38,6 +38,8 @@ import {CartPriceDirective} from './directive/cart-component.directive';
     ToastModule,
     InputTextareaModule,
     DropdownModule,
+    RadioButtonModule,
+    AccordionModule,
     CaptchaModule,
     TooltipModule,
     InputTextModule,

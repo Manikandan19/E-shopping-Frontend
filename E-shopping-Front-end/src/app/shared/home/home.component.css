@@ -19,6 +19,7 @@
 .phone-product-image-container, .watch-product-image-container{
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .item1 img {

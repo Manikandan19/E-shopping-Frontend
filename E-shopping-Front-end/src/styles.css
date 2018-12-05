@@ -10,3 +10,8 @@
 /* Owl carousel */
 @import "~owl.carousel/dist/assets/owl.carousel.css";
 @import "~owl.carousel/dist/assets/owl.theme.default.css";
+
+.spinner-container {
+  width: 10%;
+  margin: 18% 40%;
+}

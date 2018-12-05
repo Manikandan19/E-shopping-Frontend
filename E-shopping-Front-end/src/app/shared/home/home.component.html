@@ -15,7 +15,7 @@
     <button pButton type="button" label="View all" class="ui-button-rounded" routerLink='/productList/mobile'></button>
   </div>
   <owl-carousel  #owlElement [options]="{items: 4, responsive: {'0': {items: 2},'430':{items:2},'600': {items: 3}, '1000': {items: 4}}, responsiveClass: true,
-  dots: false, navigation: false, loop: true, autoplay:true, autoplayTimeout:7000, autoplayHoverPause: true}" [items]="totalProductDetails" [carouselClasses]="['owl-theme', 'owl-carousel', 'owl-phone']">
+  dots: false, navigation: false, loop: true, autoplay:true, autoplayTimeout:4000, autoplayHoverPause: true}" [items]="totalProductDetails" [carouselClasses]="['owl-theme', 'owl-carousel', 'owl-phone']">
       <div class="item" *ngFor="let product of totalProductDetails | mobileType;let i = index">
           <div class="item1">
             <div class="phone-product-image-container" (click)="productSelection(product.productName)">
